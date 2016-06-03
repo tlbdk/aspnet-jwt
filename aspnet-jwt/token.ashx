@@ -1,0 +1,1 @@
+﻿<%@ WebHandler Language="C#" CodeBehind="TokenHandler.ashx.cs" Class="aspnet_jwt.TokenHandler" %>

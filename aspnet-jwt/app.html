@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Login test</title>
+    <meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+</head>
+<body>
+
+<div id="token">
+</div>
+
+<button onclick="doLogin('index.html?response_type=token&client_id=1234&redirect_uri=http://localhost:60345/app.html');">Login</button>
+
+<script>
+    function doLogin(url) {
+        var ref = window.open(url, "NemID Login", "width=527,height=582,left=377.5,top=73.5");
+        ref.focus();
+        var checkForRedirect = setInterval(function () {
+            if (!ref || ref.closed || ref.closed === undefined) {
+                clearInterval(checkForRedirect);
+                return;
+            }
+
+            if (window.location.host === ref.window.location.host && window.location.pathname === ref.window.location.pathname) {
+                var token = ref.window.location.hash.match(/^#token=(.*)$/);
+                if (token) {
+                    $("#token").text(token[1]);
+
+                } else { // TODO: Error
+                    
+                }
+                ref.close();
+                clearInterval(checkForRedirect);
+            }
+
+        }, 500);
+    }
+</script>
+</body>
+</html>

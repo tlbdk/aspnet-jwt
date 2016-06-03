@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Login page</title>
+    <meta charset="utf-8"/>
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+</head>
+<body>
+<p>Loading....</p>
+<script>
+    var redirect_urls = {
+        "http://localhost:60345/app.html": true
+    };
+    var parms = parseQueryString(window.location.search);
+    if (parms.redirect_uri && redirect_urls[parms.redirect_uri] === true) {
+        $(function () {
+            $.ajax({
+                type: "POST",
+                url: "token.ashx",
+                data: "",
+                success: function(data) {
+                    window.location = parms.redirect_uri + "#token=" + data.id_token;
+                },
+                dataType: "json"
+            });
+        });
+    }
+
+    function parseQueryString (queryString) {
+        var params = { redirect_uri: false }, temp, i, l;
+
+        // Split into key/value pairs
+        var queries = queryString.replace(/^\?/, '').split("&");
+
+        // Convert the array of strings into an object
+        for (i = 0, l = queries.length; i < l; i++) {
+            temp = queries[i].split('=');
+            params[temp[0]] = temp[1];
+        }
+
+        return params;
+    };
+</script>
+</body>
+</html>
