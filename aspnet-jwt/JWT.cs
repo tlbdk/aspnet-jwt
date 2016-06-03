@@ -151,7 +151,7 @@ namespace aspnet_jwt
             }
         }
 
-        public static T JsonDeSerialize<T>(string jsonString)
+        private static T JsonDeSerialize<T>(string jsonString)
         {
             // Convert json to object
             using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(jsonString)))
@@ -164,8 +164,6 @@ namespace aspnet_jwt
 
     public class CryptoUtils
     {
-        // TODO: Sign // http://www.codeproject.com/Articles/210576/RSA-private-key-import-from-PEM-format-in-Csharp
-
         private const string RsaPrivateKeyHeader = "-----BEGIN RSA PRIVATE KEY-----";
         private const string RsaPrivateKeyFooter = "-----END RSA PRIVATE KEY-----";
 

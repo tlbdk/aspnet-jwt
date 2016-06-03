@@ -1,0 +1,16 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8"/>
+    <script>
+        function allowLogin() {
+            top.window.postMessage({ token: "1234" }, "*");
+        }
+    </script>
+</head>
+
+<body>
+    <button onclick="allowLogin();">Approve</button>
+</body>
+</html>
